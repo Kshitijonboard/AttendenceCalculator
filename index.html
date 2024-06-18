@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Percentage Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #95D2B3;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Attendance Percentage Calculator</h1>
+    <form id="attendance-form">
+      <label for="totalAbsent">Total Absent:</label>
+      <input type="number" id="totalAbsent" name="totalAbsent" required>
+      <label for="totalOAA">Total OAA:</label>
+      <input type="number" id="totalOAA" name="totalOAA" required>
+      <label for="totalLecture">Total Lecture:</label>
+      <input type="number" id="totalLecture" name="totalLecture" required>
+      <button type="submit">Calculate</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('attendance-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const totalAbsent = parseFloat(document.getElementById('totalAbsent').value);
+      const totalOAA = parseFloat(document.getElementById('totalOAA').value);
+      const totalLecture = parseFloat(document.getElementById('totalLecture').value);
+      
+      if (totalLecture === 0) {
+        document.getElementById('result').innerText = 'Total Lecture cannot be zero';
+        return;
+      }
+      
+      const attendancePercentage = 100 - (((totalAbsent - totalOAA) / totalLecture) * 100);
+      document.getElementById('result').innerText = `Attendance Percentage: ${attendancePercentage.toFixed(2)}%`;
+    });
+  </script>
+</body>
+</html>
